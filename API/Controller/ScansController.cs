@@ -22,15 +22,22 @@ namespace API.Controllers
         [Authorize(Roles = "Assistant,Clinician")]
         public async Task<IActionResult> Upload([FromForm] UploadScanRequestDto dto)
         {
-            // لو عندك User ID من الـ JWT:
-            int uploadedBy = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!int.TryParse(userIdValue, out int uploadedBy))
+            {
+                return Unauthorized("Invalid user token");
+            }
 
             foreach (var claim in User.Claims)
             {
                 Console.WriteLine($"{claim.Type} = {claim.Value}");
             }
+
             var filePath = await _scanService.UploadScanAsync(dto.PatientId, dto.File, uploadedBy);
+
             return Ok(new { Message = "Upload successful", FilePath = filePath });
         }
+
     }
 }

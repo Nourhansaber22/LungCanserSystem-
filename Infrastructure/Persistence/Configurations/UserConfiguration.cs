@@ -30,8 +30,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.IsActive)
             .HasDefaultValue(true);
 
+        // ✅ FIX هنا
         builder.Property(x => x.CreatedAt)
-            .HasDefaultValueSql("GETDATE()");
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
         builder.HasOne(x => x.Creator)
             .WithMany(x => x.CreatedUsers)

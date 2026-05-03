@@ -22,7 +22,12 @@ namespace API.Controllers
         [Authorize(Roles = "Assistant")]
         public async Task<IActionResult> Create([FromBody] CreatePatientDto dto)
         {
-            var assistantId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var userIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!int.TryParse(userIdValue, out int assistantId))
+            {
+                return Unauthorized("Invalid user token");
+            }
 
             var result = await _patientService.CreatePatientAsync(dto, assistantId);
 

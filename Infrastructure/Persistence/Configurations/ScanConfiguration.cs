@@ -18,8 +18,9 @@ public class ScanConfiguration : IEntityTypeConfiguration<Scan>
                .HasConversion<string>()
                .HasDefaultValue(ScanStatus.Pending);
 
+        // ✅ FIX هنا
         builder.Property(x => x.UploadDate)
-            .HasDefaultValueSql("GETDATE()");
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
         builder.HasOne(x => x.Patient)
             .WithMany(p => p.Scans)

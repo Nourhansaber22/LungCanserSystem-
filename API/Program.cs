@@ -2,6 +2,7 @@ using Application.Interfaces;
 using Application.Services;
 using Domain.Entities;
 using Domain.Enums;
+//using Microsoft.EntityFrameworkCore;
 using Infrastructure.AIServices;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
@@ -62,9 +63,14 @@ namespace API
             // ===============================
             // DbContext
             // ===============================
+            //builder.Services.AddDbContext<LuviaDbContext>(options =>
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionWithDB")));
+
             builder.Services.AddDbContext<LuviaDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionWithDB")));
+               options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
            
+            //builder.Services.AddDbContext<LuviaDbContext>(options =>
+            //           options.UseSqlite("Data Source=app.db"));
             // ===============================
             // Dependency Injection
             // ===============================

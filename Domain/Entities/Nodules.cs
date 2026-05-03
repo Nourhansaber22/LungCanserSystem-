@@ -12,10 +12,10 @@ namespace Domain.Entities
 
         public int NoduleIndex { get; set; }
 
-        public decimal? VolumeCm3 { get; set; }
-        public decimal? DiameterMm { get; set; }
+        public double? VolumeCm3 { get; set; }
+        public double? DiameterMm { get; set; }
 
-        public decimal MalignancyScore { get; set; }
+        public double MalignancyScore { get; set; }
 
         public Diagnosis Classification { get; set; }
 

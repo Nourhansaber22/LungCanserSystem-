@@ -12,7 +12,7 @@ namespace Domain.Entities
         public Scan Scan { get; set; } = default!;
 
         public Diagnosis Diagnosis { get; set; }
-        public decimal ConfidenceScore { get; set; }
+        public double ConfidenceScore { get; set; }
 
         public string? HeatmapPath { get; set; }
 
@@ -21,7 +21,7 @@ namespace Domain.Entities
         public int? PriorScanId { get; set; }
         public Scan? PriorScan { get; set; }
 
-        public decimal? VolumeChangePct { get; set; }
+        public double? VolumeChangePct { get; set; }
 
         public string? PredictionData { get; set; }
 

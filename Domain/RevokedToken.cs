@@ -9,7 +9,7 @@ namespace Domain
     public class RevokedToken
     {
         public int Id { get; set; }
-        public string Token { get; set; }
+        public required string Token { get; set; }
         public DateTime RevokedAt { get; set; } = DateTime.Now;
     }
 }

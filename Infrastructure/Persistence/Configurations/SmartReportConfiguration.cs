@@ -14,8 +14,9 @@ public class SmartReportConfiguration : IEntityTypeConfiguration<SmartReport>
         builder.Property(x => x.Diagnosis)
             .HasConversion<string>();
 
+        // ✅ التعديل الوحيد
         builder.Property(x => x.ConfidenceScore)
-            .HasColumnType("decimal(5,2)");
+            .HasConversion<double>();
 
         builder.HasOne(x => x.Scan)
             .WithOne(s => s.SmartReport)

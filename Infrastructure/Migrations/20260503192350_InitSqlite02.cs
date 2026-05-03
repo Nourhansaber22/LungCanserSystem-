@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Init022 : Migration
+    public partial class InitSqlite02 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,10 +15,10 @@ namespace Infrastructure.Migrations
                 name: "RevokedTokens",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RevokedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Token = table.Column<string>(type: "TEXT", nullable: false),
+                    RevokedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,16 +29,16 @@ namespace Infrastructure.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    CreatedBy = table.Column<int>(type: "int", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: false),
+                    Role = table.Column<string>(type: "TEXT", nullable: false),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: true),
+                    CreatedBy = table.Column<int>(type: "INTEGER", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -55,17 +55,17 @@ namespace Infrastructure.Migrations
                 name: "Patients",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PatientCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PatientCode = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    FullName = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Gender = table.Column<string>(type: "TEXT", nullable: false),
+                    ContactNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    CreatedBy = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,19 +87,19 @@ namespace Infrastructure.Migrations
                 name: "Scans",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PatientId = table.Column<int>(type: "int", nullable: false),
-                    UploadedBy = table.Column<int>(type: "int", nullable: false),
-                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UploadDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
-                    ScanDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ProcessedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "Pending"),
-                    Result = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PatientId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UploadedBy = table.Column<int>(type: "INTEGER", nullable: false),
+                    FilePath = table.Column<string>(type: "TEXT", nullable: false),
+                    FileName = table.Column<string>(type: "TEXT", nullable: false),
+                    UploadDate = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    ScanDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ProcessedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Status = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "Pending"),
+                    Result = table.Column<string>(type: "TEXT", nullable: true),
+                    Notes = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -127,15 +127,15 @@ namespace Infrastructure.Migrations
                 name: "TreatmentPlans",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PatientId = table.Column<int>(type: "int", nullable: false),
-                    ClinicianId = table.Column<int>(type: "int", nullable: false),
-                    PlanText = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PlanDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PatientId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ClinicianId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PlanText = table.Column<string>(type: "TEXT", nullable: false),
+                    PlanDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -163,20 +163,20 @@ namespace Infrastructure.Migrations
                 name: "SmartReports",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ScanId = table.Column<int>(type: "int", nullable: false),
-                    Diagnosis = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ConfidenceScore = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
-                    HeatmapPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HasPriorScan = table.Column<bool>(type: "bit", nullable: false),
-                    PriorScanId = table.Column<int>(type: "int", nullable: true),
-                    VolumeChangePct = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    PredictionData = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ReportDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReviewedBy = table.Column<int>(type: "int", nullable: true),
-                    ReviewedByUserId = table.Column<int>(type: "int", nullable: true),
-                    ReviewedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ScanId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Diagnosis = table.Column<string>(type: "TEXT", nullable: false),
+                    ConfidenceScore = table.Column<double>(type: "REAL", nullable: false),
+                    HeatmapPath = table.Column<string>(type: "TEXT", nullable: true),
+                    HasPriorScan = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PriorScanId = table.Column<int>(type: "INTEGER", nullable: true),
+                    VolumeChangePct = table.Column<double>(type: "REAL", nullable: true),
+                    PredictionData = table.Column<string>(type: "TEXT", nullable: true),
+                    ReportDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    ReviewedBy = table.Column<int>(type: "INTEGER", nullable: true),
+                    ReviewedByUserId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ReviewedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -204,19 +204,19 @@ namespace Infrastructure.Migrations
                 name: "Nodules",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ReportId = table.Column<int>(type: "int", nullable: false),
-                    NoduleIndex = table.Column<int>(type: "int", nullable: false),
-                    VolumeCm3 = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    DiameterMm = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    MalignancyScore = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Classification = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Morphology = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CoordinatesX = table.Column<int>(type: "int", nullable: true),
-                    CoordinatesY = table.Column<int>(type: "int", nullable: true),
-                    CoordinatesZ = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ReportId = table.Column<int>(type: "INTEGER", nullable: false),
+                    NoduleIndex = table.Column<int>(type: "INTEGER", nullable: false),
+                    VolumeCm3 = table.Column<double>(type: "REAL", nullable: true),
+                    DiameterMm = table.Column<double>(type: "REAL", nullable: true),
+                    MalignancyScore = table.Column<double>(type: "REAL", nullable: false),
+                    Classification = table.Column<string>(type: "TEXT", nullable: false),
+                    Location = table.Column<string>(type: "TEXT", nullable: true),
+                    Morphology = table.Column<string>(type: "TEXT", nullable: true),
+                    CoordinatesX = table.Column<int>(type: "INTEGER", nullable: true),
+                    CoordinatesY = table.Column<int>(type: "INTEGER", nullable: true),
+                    CoordinatesZ = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
