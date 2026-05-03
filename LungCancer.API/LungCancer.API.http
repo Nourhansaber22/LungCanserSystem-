@@ -1,0 +1,6 @@
+@LungCancer.API_HostAddress = http://localhost:5038
+
+GET {{LungCancer.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
